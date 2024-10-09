@@ -117,3 +117,17 @@ The first u16 likely stores flags to indicate whether it's a wall or information
 ## Supermap Entries
 
 Each supermap entry is simply a u16 storing an offset to a supertile. Not verified if there's any special codes.
+
+## Color Conversion
+
+GBA colors are 15-bit. To convert from 15-bit to 24-bit, the upper 3 bits (for each color) are simply duplicated to extend to 8 bits.
+
+This is an interesting discussion about color conversion: https://gamedev.stackexchange.com/questions/196831/how-can-i-build-an-accurate-15-bit-highcolor-rgb-palette
+
+In short, the naive approach is to scale by 255/31. The best approach is to duplicate the upper bits.
+
+## LZ77 Decompression
+
+Refer to: https://problemkaputt.de/gbatek.htm#lzdecompressionfunctions
+
+Writing a decoder is fairly straightforward... More difficulty arises if we want to write an encoder.
